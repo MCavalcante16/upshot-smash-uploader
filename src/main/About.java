@@ -326,8 +326,7 @@ public class About extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		Invoker invoker = new Invoker();
 
-		String s = ae.getActionCommand();
-		switch(s) {
+		switch(ae.getActionCommand()) {
 			case "ok":
 				invoker.setCommand(new SimpleDisposeCommand(this));
 				break;
