@@ -25,7 +25,6 @@ package main;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -33,10 +32,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -46,8 +41,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import commands.*;
 
 /**
  * A nice JDialog to display the About box of Smash Uploader
@@ -249,6 +245,35 @@ public class About extends JDialog implements ActionListener {
 		this.pack();
 		this.setLocationRelativeTo(origin);
 	}
+
+	/**
+	 * @param locale
+	 */
+	public void setLocale(Locale locale){
+		this.locale = locale;
+	}
+
+	public void getMsg(){
+		return this.msg;
+	}
+	
+	/**
+	 * @param msg
+	 */
+	public void setMsg(ResourceBundle msg){
+		this.msg=rb;
+	}
+
+	public void getLanguages(){
+		return this.languages;
+	}
+
+	/**
+	 * @param msg
+	 */
+	public void setOriginResourceBundle(ResourceBundle msg){
+		this.origin.setResourceBundle(msg);
+	}
 	
 	/**
 	 * Set the language resource as given in Smash class
@@ -299,41 +324,22 @@ public class About extends JDialog implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		String s = ae.getActionCommand();
-		if(s.equals("ok"))
-				this.dispose();
-		else if(s.equals("fr")){
-			locale = new Locale("fr","FR");
-			msg = ResourceBundle.getBundle(languages, locale);
-			this.displayLanguage();
-			origin.setResourceBundle(msg);
+		Invoker invoker = new Invoker();
+
+		switch(ae.getActionCommand()) {
+			case "ok":
+				invoker.setCommand(new SimpleDisposeCommand(this));
+				break;
+			case "fr":
+				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("fr","FR")));
+				break;
+			case "en":
+				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("en","US")));
+				break;
+			default:
+				invoker.setCommand(new VerifyDesktopSupportCommand(this));
 		}
-		else if(s.equals("en")){
-			locale = new Locale("en","US");
-			msg = ResourceBundle.getBundle(languages, locale);
-			this.displayLanguage();
-			origin.setResourceBundle(msg);
-		}
-		else {
-			try {
-				if ( Desktop.isDesktopSupported() ) {//Test if the class Desktop is supported on the OS
-					Desktop desktop = Desktop.getDesktop();
-					
-					if(s.equals("contactus")){
-						if(desktop.isSupported(Desktop.Action.MAIL))// test if the mail method is also supported
-							desktop.mail(new URI("mailto:contact@studiomelipone.eu"));
-					}
-					else if (desktop.isSupported(Desktop.Action.BROWSE)) {//test if the browse method is also supported
-						desktop.browse(new URI(s));
-					}
-				}
-			} catch (MalformedURLException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() MalformedURException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() IOException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			} catch (URISyntaxException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() URISyntaxException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		}
+
+		invoker.executeCommand();
 	}
 }
