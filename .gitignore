@@ -2,3 +2,5 @@ bin/
 .DS_Store
 *.class
 upshot-smash-uploader.und/
+debug.log
+.project
