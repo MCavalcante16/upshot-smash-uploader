@@ -329,20 +329,16 @@ public class About extends JDialog implements ActionListener {
 		String s = ae.getActionCommand();
 		switch(s) {
 			case "ok":
-				SimpleDisposeCommand sdc = new SimpleDisposeCommand(this);
-				invoker.setCommand(sdc);
+				invoker.setCommand(new SimpleDisposeCommand(this));
 				break;
 			case "fr":
-				SetNewLanguageCommand snlc = new SetNewLanguageCommand(this, new Locale("fr","FR"));
-				invoker.setCommand(snlc);
+				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("fr","FR")));
 				break;
 			case "en":
-				SetNewLanguageCommand snlc = new SetNewLanguageCommand(this, new Locale("en","US"));
-				invoker.setCommand(snlc);
+				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("en","US")));
 				break;
 			default:
-				VerifyDesktopSupportCommand vdsc = new VerifyDesktopSupportCommand(this);
-				invoker.setCommand(vdsc);
+				invoker.setCommand(new VerifyDesktopSupportCommand(this));
 		}
 
 		invoker.executeCommand();
