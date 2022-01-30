@@ -64,6 +64,7 @@ public class About extends JDialog implements ActionListener {
 	private ResourceBundle msg;
 	private String languages;
 	private Smash origin;
+	private static About instance;
 
 	public About(JFrame origin){
 		super(origin, true);
@@ -244,6 +245,13 @@ public class About extends JDialog implements ActionListener {
 		
 		this.pack();
 		this.setLocationRelativeTo(origin);
+	}
+
+	public static About getInstance(JFrame origin) {
+		if (instance == null) {
+			instance = new About(origin);
+		}
+		return instance;
 	}
 
 	/**

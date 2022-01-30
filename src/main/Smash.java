@@ -565,7 +565,7 @@ public class Smash extends JFrame implements ActionListener{
 		}
 		else if(s.equals("about")){
 			if(about==null){
-				about = new About(this);
+				about = About.getInstance(this);
 				about.setResourceBundle(msg);
 				about.setVisible(true);
 			}
