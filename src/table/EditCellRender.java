@@ -40,10 +40,7 @@ import main.Smash;
  * @author Gregory Durelle
  *
  */
-public class EditCellRender extends JButton implements TableCellRenderer{
-
-	private static final long serialVersionUID = 1L;
-	private ResourceBundle msg;
+public class EditCellRender extends CellRender{
 	
 	public EditCellRender(){
 	    this.setIcon(Smash.getIcon("edit.png"));
@@ -52,18 +49,13 @@ public class EditCellRender extends JButton implements TableCellRenderer{
 		this.setForeground(Color.WHITE);
 	}
 	
-	/**
-	 * Set the language resource as given in Smash class
-	 * @param rb the ResourceBundle representing the language
-	 */
+	@Override
 	public void setResourceBundle(ResourceBundle rb){
 		msg=rb;
 		this.displayLanguage();
 	}
 	
-	/**
-	 * Redraw all labels and buttons in the appropriate language
-	 */
+	@Override
 	private void displayLanguage(){
 		this.setText(msg.getString("edit"));
 	}
