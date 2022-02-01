@@ -113,6 +113,8 @@ public class Smash extends JFrame implements ActionListener{
         this.getContentPane().setBackground(background);
         this.getContentPane().setForeground(foreground);
         this.setIconImage(getIcon("upshot_logo.png").getImage());
+
+		CellFactory cellFactory;
         //TODO Try to use SwingWorker to load ALL images needed in the application
         
         languages = "doc/languages/trans";
@@ -245,8 +247,9 @@ public class Smash extends JFrame implements ActionListener{
 		/*Column Delete*/
 		TableColumn column = table.getColumnModel().getColumn(0);
 		column.setPreferredWidth(10);
-        delCellRender = new DeleteCellRender();
-        DeleteCellEditor delCellEditor = new DeleteCellEditor(model);
+		cellFactory = new DeleteCellFactory();
+        delCellRender = cellFactory.createCellRender();
+        DeleteCellEditor delCellEditor = cellFactory.createCellEditor(model);
 		column.setCellRenderer(delCellRender);
 		column.setCellEditor(delCellEditor);
 		column.setResizable(false);
@@ -270,8 +273,9 @@ public class Smash extends JFrame implements ActionListener{
 		column = table.getColumnModel().getColumn(4);
 		column.setPreferredWidth(55);
 		column.setResizable(false);
-        editCellRender = new EditCellRender();
-        editCellEditor = new EditCellEditor(model);
+		cellFactory = new EditCellFactory();
+        editCellRender = cellFactory.createCellRender();
+        editCellEditor = cellFactory.createCellEditor();
 		column.setCellRenderer(editCellRender);
 		column.setCellEditor(editCellEditor);
 		

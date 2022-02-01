@@ -40,10 +40,8 @@ import main.Smash;
  * @author Gregory Durelle
  *
  */
-public class DeleteCellRender extends JButton implements TableCellRenderer{
+public class DeleteCellRender extends CellRender{
 
-	private static final long serialVersionUID = 1L;
-	private ResourceBundle msg;
 	private String sending, tooltip;
 	
 	public DeleteCellRender(){
@@ -53,18 +51,13 @@ public class DeleteCellRender extends JButton implements TableCellRenderer{
 		this.setFocusable(false);
 	}
 	
-	/**
-	 * Set the language resource as given in Smash class
-	 * @param rb the ResourceBundle representing the language
-	 */
+	@Override
 	public void setResourceBundle(ResourceBundle rb){
 		msg=rb;
 		this.displayLanguage();
 	}
 	
-	/**
-	 * Redraw all labels and buttons in the appropriate language
-	 */
+	@Override
 	private void displayLanguage(){
 		sending = msg.getString("sending");
 		tooltip = msg.getString("tooltip_delrow");

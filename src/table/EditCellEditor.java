@@ -28,7 +28,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -43,12 +42,8 @@ import main.Smash;
  * @author Gregory Durelle
  *
  */
-public class EditCellEditor extends DefaultCellEditor implements ActionListener {
+public class EditCellEditor extends CellEditor {
 
-	private static final long serialVersionUID = 1L;
-	private DataModel model;
-	private int row;
-	private JButton btn;
 	private ResourceBundle msg;
 	
 	public EditCellEditor(DataModel model) {
