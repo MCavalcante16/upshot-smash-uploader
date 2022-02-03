@@ -53,7 +53,7 @@ public class VerifyDesktopSupportCommand extends Command {
                         desktop.mail(new URI("mailto:contact@studiomelipone.eu"));
                 }
                 else if (desktop.isSupported(Desktop.Action.BROWSE)) {//test if the browse method is also supported
-                    desktop.browse(new URI(s));
+                    desktop.browse(new URI(actionCommand));
                 }
             }
         } catch (MalformedURLException e) {

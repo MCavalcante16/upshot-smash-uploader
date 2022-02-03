@@ -58,7 +58,7 @@ public class DeleteCellRender extends CellRender{
 	}
 	
 	@Override
-	private void displayLanguage(){
+	public void displayLanguage(){
 		sending = msg.getString("sending");
 		tooltip = msg.getString("tooltip_delrow");
 	}

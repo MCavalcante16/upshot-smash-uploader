@@ -37,8 +37,8 @@ import javax.swing.table.TableCellRenderer;
  */
 public abstract class CellRender extends JButton implements TableCellRenderer{
 
-	private static final long serialVersionUID = 1L;
-	private ResourceBundle msg;
+	static final long serialVersionUID = 1L;
+	ResourceBundle msg;
 
 	/**
 	 * Set the language resource as given in Smash class
@@ -49,5 +49,5 @@ public abstract class CellRender extends JButton implements TableCellRenderer{
 	/**
 	 * Redraw all labels and buttons in the appropriate language
 	 */
-	private abstract void displayLanguage();
+	public abstract void displayLanguage();
 }

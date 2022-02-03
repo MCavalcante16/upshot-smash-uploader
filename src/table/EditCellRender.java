@@ -56,7 +56,7 @@ public class EditCellRender extends CellRender{
 	}
 	
 	@Override
-	private void displayLanguage(){
+	public void displayLanguage(){
 		this.setText(msg.getString("edit"));
 	}
 	

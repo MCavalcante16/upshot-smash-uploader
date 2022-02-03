@@ -71,6 +71,9 @@ import table.DeleteCellEditor;
 import table.DeleteCellRender;
 import table.EditCellEditor;
 import table.EditCellRender;
+import table.CellFactory;
+import table.DeleteCellFactory;
+import table.EditCellFactory;
 import connect.Login;
 import connect.UpConnection;
 
@@ -248,8 +251,8 @@ public class Smash extends JFrame implements ActionListener{
 		TableColumn column = table.getColumnModel().getColumn(0);
 		column.setPreferredWidth(10);
 		cellFactory = new DeleteCellFactory();
-        delCellRender = cellFactory.createCellRender();
-        DeleteCellEditor delCellEditor = cellFactory.createCellEditor(model);
+        delCellRender = (DeleteCellRender) cellFactory.createCellRender();
+        DeleteCellEditor delCellEditor = (DeleteCellEditor) cellFactory.createCellEditor(model);
 		column.setCellRenderer(delCellRender);
 		column.setCellEditor(delCellEditor);
 		column.setResizable(false);
@@ -274,8 +277,8 @@ public class Smash extends JFrame implements ActionListener{
 		column.setPreferredWidth(55);
 		column.setResizable(false);
 		cellFactory = new EditCellFactory();
-        editCellRender = cellFactory.createCellRender();
-        editCellEditor = cellFactory.createCellEditor();
+        editCellRender = (EditCellRender) cellFactory.createCellRender();
+        editCellEditor = (EditCellEditor) cellFactory.createCellEditor(model);
 		column.setCellRenderer(editCellRender);
 		column.setCellEditor(editCellEditor);
 		

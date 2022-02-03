@@ -23,7 +23,7 @@
  */
 package table;
 
-interface Cell {
+public interface CellFactory {
     public CellRender createCellRender();
-    public CellEditor createCellEditor();
+    public CellEditor createCellEditor(DataModel model);
 }

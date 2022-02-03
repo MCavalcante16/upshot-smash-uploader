@@ -30,5 +30,5 @@ package commands;
  */
 public abstract class Command {
     public Command(){}
-    public abstract execute();
+    public abstract void execute();
 }

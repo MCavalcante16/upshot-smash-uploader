@@ -26,6 +26,7 @@ package table;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 
 /**
  * cell editor to implements button functionnality to a cell of the table 
@@ -35,9 +36,12 @@ import javax.swing.JButton;
  *
  */
 public abstract class CellEditor extends DefaultCellEditor implements ActionListener {
+	static final long serialVersionUID = 1L;
+	DataModel model;
+	int row;
+	JButton btn;
 
-	private static final long serialVersionUID = 1L;
-	private DataModel model;
-	private int row;
-	private JButton btn;
+	public CellEditor(JCheckBox checkBox) {
+		super(checkBox);
+	}
 }

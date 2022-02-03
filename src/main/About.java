@@ -261,7 +261,7 @@ public class About extends JDialog implements ActionListener {
 		this.locale = locale;
 	}
 
-	public void getMsg(){
+	public ResourceBundle getMsg(){
 		return this.msg;
 	}
 	
@@ -269,10 +269,10 @@ public class About extends JDialog implements ActionListener {
 	 * @param msg
 	 */
 	public void setMsg(ResourceBundle msg){
-		this.msg=rb;
+		this.msg=msg;
 	}
 
-	public void getLanguages(){
+	public String getLanguages(){
 		return this.languages;
 	}
 
@@ -296,7 +296,7 @@ public class About extends JDialog implements ActionListener {
 	/**
 	 * Redraw all labels and buttons in the appropriate language
 	 */
-	private void displayLanguage(){
+	public void displayLanguage(){
 		links[3].setText("<html><body><u>"+msg.getString("contactus")+"</u></body><html>");
 		String txt="";
 		if(locale.getLanguage().equals("en")){
@@ -334,7 +334,8 @@ public class About extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		Invoker invoker = new Invoker();
 
-		switch(ae.getActionCommand()) {
+		String s = ae.getActionCommand();
+		switch(s) {
 			case "ok":
 				invoker.setCommand(new SimpleDisposeCommand(this));
 				break;
@@ -345,7 +346,7 @@ public class About extends JDialog implements ActionListener {
 				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("en","US")));
 				break;
 			default:
-				invoker.setCommand(new VerifyDesktopSupportCommand(this));
+				invoker.setCommand(new VerifyDesktopSupportCommand(s));
 		}
 
 		invoker.executeCommand();
