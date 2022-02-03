@@ -234,6 +234,7 @@ public class Login extends JDialog implements ActionListener {
 		return answer;
 	}
 	
+	//Code smell - dispersed coupling
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		String s = ae.getActionCommand();
