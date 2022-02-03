@@ -538,7 +538,6 @@ public class Smash extends JFrame implements ActionListener{
 		table.repaint();
 	}
 
-	//Code smell - brain method
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		String s = ae.getActionCommand();
