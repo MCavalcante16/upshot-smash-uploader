@@ -23,6 +23,10 @@
  */
 package commands;
 
+import java.util.Locale;
+
+import main.About;
+
 /**
  * Class to request commands
  * @author Maurício Bráz
@@ -39,5 +43,23 @@ public class Invoker {
 
     public void executeCommand() {
         this.command.execute();
+    }
+
+    public void executeAboutCommand(About about, String s) {
+        switch(s) {
+			case "ok":
+				this.setCommand(new SimpleDisposeCommand(about));
+				break;
+			case "fr":
+				this.setCommand(new SetNewLanguageCommand(about, new Locale("fr","FR")));
+				break;
+			case "en":
+				this.setCommand(new SetNewLanguageCommand(about, new Locale("en","US")));
+				break;
+			default:
+				this.setCommand(new VerifyDesktopSupportCommand(s));
+		}
+
+		this.executeCommand();
     }
 }

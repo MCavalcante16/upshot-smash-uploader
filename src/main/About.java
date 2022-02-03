@@ -331,26 +331,9 @@ public class About extends JDialog implements ActionListener {
 		content.setText(txt);
 	}
 	
-	//Code smell - Feature Envy
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Invoker invoker = new Invoker();
-
-		String s = ae.getActionCommand();
-		switch(s) {
-			case "ok":
-				invoker.setCommand(new SimpleDisposeCommand(this));
-				break;
-			case "fr":
-				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("fr","FR")));
-				break;
-			case "en":
-				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("en","US")));
-				break;
-			default:
-				invoker.setCommand(new VerifyDesktopSupportCommand(s));
-		}
-
-		invoker.executeCommand();
+		invoker.executeAboutCommand(this, ae.getActionCommand());
 	}
 }
