@@ -25,9 +25,7 @@ package table;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -39,12 +37,7 @@ import javax.swing.JTable;
  * @author Gregory Durelle
  *
  */
-public class DeleteCellEditor extends DefaultCellEditor implements ActionListener {
-
-	private static final long serialVersionUID = 1L;
-	private DataModel model;
-	private int row;
-	private JButton btn;
+public class DeleteCellEditor extends CellEditor {
 	
 	public DeleteCellEditor(DataModel model) {
 		super(new JCheckBox());

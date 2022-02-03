@@ -162,6 +162,7 @@ public class UpConnection implements Runnable{
 		}
 	}
 	
+	//Code smell - dispersed coupling
 	/**
 	 * Post request to setted up host
 	 * it send the file given, with all its informations

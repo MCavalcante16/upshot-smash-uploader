@@ -30,7 +30,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -49,7 +48,7 @@ import javax.swing.JTextField;
  * @author Gregory Durelle
  *
  */
-public class Login extends JDialog implements ActionListener, Serializable {
+public class Login extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 3399486907330854821L;
 	private GridBagLayout gbl;
@@ -234,6 +233,26 @@ public class Login extends JDialog implements ActionListener, Serializable {
 	public int getAnswer(){
 		return answer;
 	}
+
+    private void setWarnEmptyMessage() {
+		message.setForeground(Color.decode("#FF6600"));
+		message.setText(msg.getString("warn_empty"));
+		this.pack();
+	}
+
+	private void setErrWrongMessage() {
+		uc.setUser(login, token);
+
+		if((answer=uc.getId())<=0){
+			init();
+			message.setForeground(Color.RED);
+			message.setText(msg.getString("err_wrong"));
+			this.pack();
+		} else {
+			message.setText("");
+			this.dispose();
+		}
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -252,22 +271,10 @@ public class Login extends JDialog implements ActionListener, Serializable {
 			pass=null;
 			
 			if(login.isEmpty() || token.isEmpty()){
-				message.setForeground(Color.decode("#FF6600"));
-				message.setText(msg.getString("warn_empty"));
-				this.pack();
+				setWarnEmptyMessage();
 			}
 			else{
-				uc.setUser(login, token);
-
-				if((answer=uc.getId())<=0){
-					init();
-					message.setForeground(Color.RED);
-					message.setText(msg.getString("err_wrong"));
-					this.pack();
-				} else {
-					message.setText("");
-					this.dispose();
-				}
+				setErrWrongMessage();
 			}
 		}
 		else if (s.equals("Cancel")){
