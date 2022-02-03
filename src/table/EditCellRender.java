@@ -27,9 +27,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ResourceBundle;
 
-import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
 
 import main.Smash;
 

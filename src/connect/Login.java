@@ -30,7 +30,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -49,7 +48,7 @@ import javax.swing.JTextField;
  * @author Gregory Durelle
  *
  */
-public class Login extends JDialog implements ActionListener, Serializable {
+public class Login extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 3399486907330854821L;
 	private GridBagLayout gbl;
