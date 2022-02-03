@@ -66,6 +66,7 @@ public class About extends JDialog implements ActionListener {
 	private Smash origin;
 	private static About instance;
 
+	//Code Smell - Dispersed Coupling
 	public About(JFrame origin){
 		super(origin, true);
 		this.origin=(Smash)origin;
@@ -330,6 +331,7 @@ public class About extends JDialog implements ActionListener {
 		content.setText(txt);
 	}
 	
+	//Code smell - Feature Envy
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Invoker invoker = new Invoker();
