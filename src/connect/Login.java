@@ -233,6 +233,26 @@ public class Login extends JDialog implements ActionListener {
 	public int getAnswer(){
 		return answer;
 	}
+
+    private void setWarnEmptyMessage() {
+		message.setForeground(Color.decode("#FF6600"));
+		message.setText(msg.getString("warn_empty"));
+		this.pack();
+	}
+
+	private void setErrWrongMessage() {
+		uc.setUser(login, token);
+
+		if((answer=uc.getId())<=0){
+			init();
+			message.setForeground(Color.RED);
+			message.setText(msg.getString("err_wrong"));
+			this.pack();
+		} else {
+			message.setText("");
+			this.dispose();
+		}
+	}
 	
 	//Code smell - dispersed coupling
 	@Override
@@ -252,22 +272,10 @@ public class Login extends JDialog implements ActionListener {
 			pass=null;
 			
 			if(login.isEmpty() || token.isEmpty()){
-				message.setForeground(Color.decode("#FF6600"));
-				message.setText(msg.getString("warn_empty"));
-				this.pack();
+				setWarnEmptyMessage();
 			}
 			else{
-				uc.setUser(login, token);
-
-				if((answer=uc.getId())<=0){
-					init();
-					message.setForeground(Color.RED);
-					message.setText(msg.getString("err_wrong"));
-					this.pack();
-				} else {
-					message.setText("");
-					this.dispose();
-				}
+				setErrWrongMessage();
 			}
 		}
 		else if (s.equals("Cancel")){
