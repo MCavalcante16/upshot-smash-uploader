@@ -66,6 +66,7 @@ public class About extends JDialog implements ActionListener {
 	private Smash origin;
 	private static About instance;
 
+	//Code Smell - Dispersed Coupling
 	public About(JFrame origin){
 		super(origin, true);
 		this.origin=(Smash)origin;
@@ -333,22 +334,6 @@ public class About extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Invoker invoker = new Invoker();
-
-		String s = ae.getActionCommand();
-		switch(s) {
-			case "ok":
-				invoker.setCommand(new SimpleDisposeCommand(this));
-				break;
-			case "fr":
-				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("fr","FR")));
-				break;
-			case "en":
-				invoker.setCommand(new SetNewLanguageCommand(this, new Locale("en","US")));
-				break;
-			default:
-				invoker.setCommand(new VerifyDesktopSupportCommand(s));
-		}
-
-		invoker.executeCommand();
+		invoker.executeAboutCommand(this, ae.getActionCommand());
 	}
 }

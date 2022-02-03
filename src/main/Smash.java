@@ -541,72 +541,82 @@ public class Smash extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		String s = ae.getActionCommand();
-		if(s.equals("SEND")){
-			if(model.getRowCount()==0)
-				JOptionPane.showMessageDialog(this, "Nothing to send !\nAdd image files and try again.", "Send what ?", JOptionPane.WARNING_MESSAGE);
-			else{
-				sender.setEnabled(false);
-				
-				/* 
-				 * DO THE HTTP JOB
-				 * send each file with its informations to create drafts upshots
-				 * and refresh the list at the same time...
-				 * */
-				uc.setModel(model);
-				Thread t = new Thread(uc);
-				t.start();
-				this.repaint();
 
-			}
-		}
-		else if(s.equals("login")){
-			
-			log.setVisible(true);
-			
-			if(log.getAnswer()>0){
-				save();
-				if(model.getImages().size()>0)
-					sender.setEnabled(true);
-			}
-			else sender.setEnabled(false);
-		}
-		else if(s.equals("about")){
-			if(about==null){
-				about = About.getInstance(this);
-				about.setResourceBundle(msg);
-				about.setVisible(true);
-			}
-			else {
-				about.setResourceBundle(msg);
-				about.setVisible(true);
-			}
-		}
-		else if(s.equals("help")){
-			try {
-				if ( Desktop.isDesktopSupported() ) {//Test if the class Desktop is supported on the OS
-					Desktop desktop = Desktop.getDesktop();
+		switch (s) {
+			case "SEND":
+				if(model.getRowCount()==0)
+					JOptionPane.showMessageDialog(this, "Nothing to send !\nAdd image files and try again.", "Send what ?", JOptionPane.WARNING_MESSAGE);
+				else{
+					sender.setEnabled(false);
 					
-					if (desktop.isSupported(Desktop.Action.BROWSE)) {//test if the browse method is also supported
-						desktop.browse(new URI("http://smashuploader.com/help"));
-					}
+					/* 
+					* DO THE HTTP JOB
+					* send each file with its informations to create drafts upshots
+					* and refresh the list at the same time...
+					* */
+					uc.setModel(model);
+					Thread t = new Thread(uc);
+					t.start();
+					this.repaint();
+
 				}
-			} catch (MalformedURLException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() MalformedURException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() IOException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			} catch (URISyntaxException e) {
-				JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() URISyntaxException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		}
-		else if(s.equals("fr")){
-			locale = new Locale("fr","FR");
-			msg = ResourceBundle.getBundle(languages, locale);
-			this.displayLanguage();
-		}
-		else if(s.equals("en")){
-			locale = new Locale("en","US");
-			msg = ResourceBundle.getBundle(languages, locale);
-			this.displayLanguage();
+				break;
+			
+			case "login":
+				log.setVisible(true);
+				
+				if(log.getAnswer()>0){
+					save();
+					if(model.getImages().size()>0)
+						sender.setEnabled(true);
+				}
+				else sender.setEnabled(false);
+				break;
+
+			case "about":
+				if(about==null){
+					about = About.getInstance(this);
+					about.setResourceBundle(msg);
+					about.setVisible(true);
+				}
+				else {
+					about.setResourceBundle(msg);
+					about.setVisible(true);
+				}
+				break;
+
+			case "help":
+				try {
+					if ( Desktop.isDesktopSupported() ) {//Test if the class Desktop is supported on the OS
+						Desktop desktop = Desktop.getDesktop();
+						
+						if (desktop.isSupported(Desktop.Action.BROWSE)) {//test if the browse method is also supported
+							desktop.browse(new URI("http://smashuploader.com/help"));
+						}
+					}
+				} catch (MalformedURLException e) {
+					JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() MalformedURException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() IOException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (URISyntaxException e) {
+					JOptionPane.showMessageDialog(Smash.getFrames()[0], "About.actionPerformed() URISyntaxException : "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+
+			case "fr": 
+				locale = new Locale("fr","FR");
+				msg = ResourceBundle.getBundle(languages, locale);
+				this.displayLanguage();
+				break;
+
+			case "en":
+				locale = new Locale("en","US");
+				msg = ResourceBundle.getBundle(languages, locale);
+				this.displayLanguage();
+				break;
+
+			default:
+				break;
 		}
 	}
 	
